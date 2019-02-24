@@ -1,0 +1,47 @@
+#include "BBoard.h"
+
+using namespace std;
+
+int main() {
+    string userfile;
+    string datafile;
+    
+    cout << "User file?" << endl;
+    cin >> userfile;
+    cout << endl;
+// cout<<"finished loading userfile in main"<<endl;
+    cout << "Message file?" << endl;
+    cin >> datafile;
+    cout << endl;
+// cout<<"finished loading msgfile in main"<<endl;
+    BBoard bb("CS12 Bulletin Board");
+// cout<<"SADASSASDAWFSFGS"<<endl;
+    // load users from file
+    if (!bb.loadUsers(userfile))
+    {
+        cout << "ERROR: Cannot load users from " << userfile << endl;
+        return 1;
+    }
+   
+    // load messages   
+    if (!bb.loadMessages(datafile))
+    {
+        cout << "ERROR: Cannot load messages from " << datafile << endl;
+        return 1;
+    }
+
+    bb.login();
+    bb.run();
+
+    // save messages
+    if (!bb.saveMessages(datafile))
+    {
+        cout << "ERROR: Cannot save messages to " << datafile << endl;
+        return 1;
+    }
+
+    return 0;
+} 
+
+
+
